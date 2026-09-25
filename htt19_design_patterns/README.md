@@ -1,4 +1,4 @@
-# HTT19 - Design Patterns
+# Aurora Nest
 
 Bộ bài làm hoàn chỉnh cho đề tài **Hệ thống Quản lý Khách sạn và Homestay HTT19**.
 
