@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+actor "Nhân viên lễ tân" as Receptionist
+actor "Cổng thanh toán" as Gateway
+rectangle "Check-in" {
+ usecase "Tìm đặt phòng" as FindBooking
+ usecase "Xác minh khách hàng" as VerifyGuest
+ usecase "Kiểm tra phòng trống" as CheckRoom
+ usecase "Cập nhật phòng = occupied" as OccupyRoom
+ usecase "Tạo phiếu nhận phòng" as CreateCheckin
+}
+Receptionist --> FindBooking
+Receptionist --> VerifyGuest
+FindBooking --> CheckRoom : <<include>>
+CheckRoom --> OccupyRoom : <<include>>
+OccupyRoom --> CreateCheckin : <<include>>
+rectangle "Check-out và thanh toán" {
+ usecase "Tính tiền phòng" as RoomCharge
+ usecase "Tính tiền dịch vụ" as ServiceCharge
+ usecase "Áp dụng Strategy giảm giá" as Discount
+ usecase "Tạo hóa đơn" as Invoice
+ usecase "Thanh toán" as Pay
+ usecase "Ghi nhận doanh thu" as Revenue
+}
+Receptionist --> RoomCharge
+Receptionist --> ServiceCharge
+RoomCharge --> Discount : <<include>>
+ServiceCharge --> Discount : <<include>>
+Discount --> Invoice : <<include>>
+Invoice --> Pay : <<include>>
+Pay --> Revenue : <<include>>
+Gateway --> Pay
+@enduml
+      
