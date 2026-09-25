@@ -1,20 +1,24 @@
 @startuml
 left to right direction
 skinparam packageStyle rectangle
+skinparam shadowing false
 actor "Quản trị viên" as Admin
 actor "Nhân viên lễ tân" as Receptionist
 actor "Khách hàng" as Customer
 actor "Cổng thanh toán" as Gateway
-rectangle "HTT19 - Quản lý khách sạn và Homestay" {
- usecase "Đăng nhập" as Login
- usecase "Quản lý phòng" as Rooms
- usecase "Quản lý khách hàng" as Guests
- usecase "Đặt phòng" as Booking
- usecase "Check-in" as CheckIn
- usecase "Check-out" as CheckOut
- usecase "Quản lý dịch vụ" as Services
- usecase "Thanh toán" as Payment
- usecase "Báo cáo doanh thu" as Reports
+rectangle "Aurora Nest - Quản lý khách sạn và Homestay" {
+  usecase "Đăng nhập" as Login
+  usecase "Quản lý phòng" as Rooms
+  usecase "Quản lý khách hàng" as Guests
+  usecase "Tìm phòng trống" as Search
+  usecase "Đặt phòng" as Booking
+  usecase "Xác nhận tiền cọc" as Deposit
+  usecase "Check-in" as CheckIn
+  usecase "Check-out" as CheckOut
+  usecase "Quản lý dịch vụ" as Services
+  usecase "Thanh toán" as Payment
+  usecase "Báo cáo doanh thu" as Reports
+  usecase "Gửi thông báo" as Notify
 }
 Admin --> Login
 Admin --> Rooms
@@ -22,13 +26,19 @@ Admin --> Guests
 Admin --> Services
 Admin --> Reports
 Receptionist --> Login
+Receptionist --> Search
 Receptionist --> Booking
 Receptionist --> CheckIn
 Receptionist --> CheckOut
 Receptionist --> Payment
+Customer --> Search
 Customer --> Booking
+Customer --> Deposit
 Customer --> Payment
 Gateway --> Payment
+Booking ..> Search : <<include>>
+Booking ..> Deposit : <<include>>
+Deposit ..> Notify : <<include>>
 CheckOut ..> Payment : <<include>>
+Payment ..> Notify : <<include>>
 @enduml
-      

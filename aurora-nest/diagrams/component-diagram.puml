@@ -1,0 +1,21 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam shadowing false
+actor "Khách hàng / Lễ tân" as User
+component "Aurora Nest Web UI" as UI
+component "BookingService" as Booking
+component "DIContainer" as DI
+component "RoomRepository" as Repo
+component "DiscountCalculator" as Discount
+component "PaymentFactory" as Factory
+component "VNPay / Momo / CreditCard" as Gateways
+database "PostgreSQL / Neon" as DB
+User --> UI
+UI --> Booking
+DI ..> Booking : cung cấp dependency
+Booking --> Repo
+Booking --> Discount
+Booking --> Factory
+Repo --> DB
+Factory --> Gateways
+@enduml

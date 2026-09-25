@@ -1,0 +1,23 @@
+@startuml
+start
+:Khách chọn phòng và ngày nhận/trả;
+:Tìm phòng còn trống;
+if (Còn phòng?) then (Có)
+  :Tính số đêm và tổng tiền;
+  :Chọn Strategy giảm giá;
+  :Tính tiền cọc;
+  :Chọn cổng thanh toán qua Factory;
+  :Thực hiện thanh toán/chuyển khoản;
+  if (Thanh toán thành công?) then (Có)
+    :Tạo booking trạng thái pending;
+    :Gửi mã đặt phòng;
+    :Nhân viên xác nhận tiền cọc;
+    :Booking trạng thái confirmed;
+  else (Không)
+    :Thông báo thanh toán thất bại;
+  endif
+else (Không)
+  :Thông báo phòng không khả dụng;
+endif
+stop
+@enduml

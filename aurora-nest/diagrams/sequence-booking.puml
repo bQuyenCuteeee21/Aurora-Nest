@@ -1,0 +1,25 @@
+@startuml
+hide footbox
+autonumber
+actor "Khách hàng" as Customer
+participant "BookingService" as Service
+participant "RoomRepository" as Repo
+participant "DiscountCalculator" as Discount
+participant "PaymentFactory" as Factory
+participant "PaymentGateway" as Gateway
+database "PostgreSQL / Neon" as DB
+Customer -> Service: create_booking(room, dates, strategy)
+Service -> Repo: find_available(room, dates)
+Repo -> DB: SELECT phòng trống
+DB --> Repo: room
+Repo --> Service: room available
+Service -> Discount: calculate(total)
+Discount --> Service: final_total
+Service -> Factory: create(payment_type)
+Factory --> Service: gateway
+Service -> Gateway: pay(deposit)
+Gateway --> Service: payment_result
+Service -> DB: INSERT booking(status=pending)
+DB --> Service: booking_code
+Service --> Customer: mã đặt phòng + QR/chuyển khoản
+@enduml

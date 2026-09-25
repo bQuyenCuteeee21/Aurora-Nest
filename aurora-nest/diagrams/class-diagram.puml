@@ -1,0 +1,80 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+class RoomType {
+  +id: int
+  +name: str
+  +code: str
+  +price: int
+  +view: str
+  +bathroom: str
+  +amenities: list
+}
+class RoomImage {
+  +image: str
+  +caption: str
+  +order: int
+}
+class Booking {
+  +id: int
+  +code: str
+  +guest_name: str
+  +check_in: date
+  +check_out: date
+  +status: str
+  +deposit_amount: int
+  +total_amount: int
+  +mark_deposit_sent()
+  +approve_deposit()
+}
+class AppConfigManager <<Singleton>> {
+  -_instance
+  -settings: dict
+  +get_instance()
+  +get(key)
+  +set(key, value)
+}
+interface PaymentGateway {
+  +pay(amount: int)
+}
+class VNPayPayment
+class MomoPayment
+class CreditCardPayment
+class PaymentFactory <<Factory>> {
+  +create(type): PaymentGateway
+}
+interface DiscountStrategy <<Strategy>> {
+  +calculate(total: int): int
+}
+class VIPDiscount
+class NewCustomerDiscount
+class FlashSaleDiscount
+class DiscountCalculator
+class RoomRepository <<Repository>> {
+  +find_available()
+  +find_by_code(code)
+}
+class BookingService <<Service>> {
+  +create_booking()
+  +confirm_deposit()
+}
+class DIContainer <<IoC Container>> {
+  +register(name, factory)
+  +resolve(name)
+}
+RoomType "1" o-- "many" RoomImage
+RoomType "1" -- "many" Booking
+PaymentGateway <|.. VNPayPayment
+PaymentGateway <|.. MomoPayment
+PaymentGateway <|.. CreditCardPayment
+PaymentFactory ..> PaymentGateway
+DiscountStrategy <|.. VIPDiscount
+DiscountStrategy <|.. NewCustomerDiscount
+DiscountStrategy <|.. FlashSaleDiscount
+DiscountCalculator --> DiscountStrategy
+BookingService --> RoomRepository
+BookingService --> PaymentFactory
+BookingService --> DiscountCalculator
+DIContainer ..> BookingService : injects
+AppConfigManager ..> BookingService : config
+@enduml
