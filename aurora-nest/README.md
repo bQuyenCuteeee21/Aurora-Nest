@@ -25,7 +25,7 @@ Kết quả demo gồm: đọc cấu hình Singleton, check-in phòng qua Reposi
 Đứng tại thư mục gốc dự án và chạy:
 
 ```bash
-node htt19_design_patterns/slides/create_presentation.cjs
+node aurora-nest/slides/create_presentation.cjs
 ```
 
 File PowerPoint sẽ được tạo tại thư mục hiện hành với tên `HTT19_Design_Patterns.pptx`. Bản đã tạo sẵn nằm trong thư mục `slides`.
