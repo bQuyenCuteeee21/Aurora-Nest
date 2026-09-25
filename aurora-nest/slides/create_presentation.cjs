@@ -25,5 +25,5 @@ s=addSlide('11. Use Case chi tiết: Check-out'); bullets(s,['Tính tiền phòn
 s=addSlide('12. Demo luồng nghiệp vụ'); bullets(s,['Khách check-out với tổng tiền ban đầu 5.000.000 VND.','Strategy VIP giảm 20% → còn 4.000.000 VND.','Factory tạo gateway MoMo.','Gateway xử lý thanh toán và hệ thống ghi nhận doanh thu.']);
 s=addSlide('13. Đánh giá kiến trúc'); bullets(s,['Ưu điểm: rõ ràng, dễ mở rộng, dễ bảo trì, dễ kiểm thử.','Factory mở rộng phương thức thanh toán.','Strategy mở rộng chính sách giá.','Repository tách nghiệp vụ khỏi CSDL.','Hạn chế: tăng số lượng class và không nên lạm dụng pattern.']);
 s=addSlide('14. Kết luận'); s.addText('Design Pattern biến bài toán thực tế thành kiến trúc có thể mở rộng.',{x:1,y:2,w:11.2,h:0.7,fontSize:26,bold:true,color:teal,align:'center',margin:0}); bullets(s,['Singleton quản lý cấu hình dùng chung.','Factory khởi tạo cổng thanh toán linh hoạt.','Strategy thay đổi thuật toán giảm giá runtime.','DI Container quản lý dependency và giảm coupling.'],1.4,3.1,10.4,20); s.addText('Cảm ơn thầy/cô và các bạn đã lắng nghe.',{x:1,y:6.2,w:11,h:0.4,fontSize:18,bold:true,color:navy,align:'center',margin:0});
-pptx.writeFile({ fileName: 'HTT19_Design_Patterns.pptx' });
+pptx.writeFile({ fileName: '/vercel/share/v0-project/aurora-nest/slides/Aurora-Nest-Design-Patterns.pptx' });
       
